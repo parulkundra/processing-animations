@@ -18,7 +18,7 @@ public class ExpandingEllipse extends PApplet{
 	static int maxRadius = 2000;
 
     public static void main(String[] args) {
-        PApplet.main("com.parul.processing.*");
+        PApplet.main("com.parul.processing.ExpandingEllipse");
     }
 
     public void settings(){
