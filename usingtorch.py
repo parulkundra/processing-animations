@@ -5,7 +5,7 @@ import stable_whisper as stable
 # Assumes a text file 'transcript.txt' and 'audio.wav' exist
 # Using a Wav2Vec2 based alignment approach
 model = stable.load_model("medium")
-folder = "C:/development/music/AhistaAhista/"
+folder = "C:/development/karaoke/bhagwatGita/chapter1/"
 with open(folder + "raw_lyrics.txt", "r", encoding="utf-8") as f:
     transcript = f.read().strip()
 
@@ -15,7 +15,7 @@ with open(folder + "raw_lyrics.txt", "r", encoding="utf-8") as f:
 #transcript = re.sub(r"\s+", " ", transcript).strip()
 
 result = model.align(
-    folder + "vocals.mp3",
+    folder + "vocals.wav",
     transcript,
     language="Hindi",
     original_split= True
