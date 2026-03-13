@@ -25,7 +25,8 @@ print("Loading AI models...")
 tts = ChatterboxTTS.from_pretrained('cuda')
 
 pipe = AutoPipelineForText2Image.from_pretrained(
-    "stabilityai/sdxl-turbo",
+    #"stabilityai/sdxl-turbo",
+    "stabilityai/stable-diffusion-xl-base-1.0",
     torch_dtype=torch.float16,
     variant="fp16"
 )
@@ -39,16 +40,26 @@ for i,scene in enumerate(story):
     print("Scene",i)
 
     prompt = f"""
-storybook illustration for children,
-{scene},
-soft pastel colors,
-bedtime story illustration,
-gentle lighting
-"""
+        storybook illustration for children,
+        {scene},
+        soft pastel colors,
+        bedtime story illustration,
+        gentle lighting
+    """
+
+    negative_prompt = """
+        deformed, mutated, extra limbs, extra arms,
+        extra legs, extra fingers, distorted face,
+        crooked eyes, bad anatomy, blurry
+    """
 
     img = pipe(prompt,
-        num_inference_steps=2,
-        guidance_scale=0.0).images[0]
+                negative_prompt=negative_prompt,
+                num_inference_steps=20,
+                guidance_scale=7.0,
+                height=1024,
+                width=1024
+            ).images[0]
 
     img_path = f"images/scene{i}.png"
     img.save(img_path)
