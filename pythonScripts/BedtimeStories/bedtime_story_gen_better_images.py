@@ -79,7 +79,7 @@ for i,scene in enumerate(story):
     torchaudio.save(
         audio_path,
         audio.cpu(),
-        24000
+        20000
     )
 
     image_clip = ImageClip(img_path).set_duration(6)
@@ -92,7 +92,7 @@ for i,scene in enumerate(story):
 
 video = concatenate_videoclips(clips)
 
-music = AudioFileClip("music/lullaby.mp3").volumex(0.2)
+music = AudioFileClip("music/lullaby.mp3").volumex(0.1)
 
 final_audio = CompositeAudioClip([music,video.audio])
 
